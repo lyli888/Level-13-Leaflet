@@ -13,6 +13,8 @@ d3.json(link).then(function(response){
       var circleShape;
     }
 
+    console.log(location);
+
     createMap(data.features);
 
 });
