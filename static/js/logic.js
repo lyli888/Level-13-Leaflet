@@ -11,9 +11,10 @@ d3.json(link).then(function(response){
     var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
     var depth = [response.features[i].geometry.coordinates[2]
     var circleFill;
+
 	console.log(location);
 	
-		//Set Circle Color 
+		//Set Circle Fill Color By Depth
 		if(depth > 5){
 			circleFill = "black"; 
 		}
@@ -40,51 +41,47 @@ d3.json(link).then(function(response){
 		fillColor: circleFill,
 		radius: mag * 10
     });
-		
-});						
+							
 
-//Initialize Map
-var myMap = L.map("map", {
-    center: [0 , 0],
-    zoom: 2,
-    layers: [sateliteMap, earthquakes]
-});
+	//Initialize Map
+	var myMap = L.map("map", {
+    	center: [0 , 0],
+    	zoom: 2,
+    	layers: [sateliteMap, earthquakes]
+	});
 
-//Regular Map
-var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-	attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-	maxZoom: 18,
-	id: "mapbox.satellite",
-	accessToken: API_KEY
-});
+	//Regular Map
+	var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+		attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+		maxZoom: 18,
+		id: "mapbox.satellite",
+		accessToken: API_KEY
+	});
 
-//Dark Map
-var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+	//Dark Map
+	var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
       attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
       maxZoom: 18,
       id: "mapbox.dark",
       accessToken: API_KEY
-});
+	});
   
-//Add Layers
-var baseMaps = {
+	//Add Layers
+	var baseMaps = {
       "Satelite Map": sateliteMap,
       "Dark Map": darkMap
-}
+	}
 
-//Earthquake Layer
-var overlayMaps = {
-      Earthquakes: earthquakes
-};
-
-//Toggle Menu
-L.control.layers(baseMaps, overlayMaps, {
+	//Toggle Menu
+	L.control.layers(baseMaps, overlayMaps, {
       collapsed: false
     }).addTo(myMap);
   
-//Legend
-var legend = L.control({position: 'bottomright'});
-legend.addTo(myMap);
+	//Legend
+	var legend = L.control({position: 'bottomright'});
+	legend.addTo(myMap);
 
-//Add Earthquakes
-earthquake.addTo(myMap);
+	//Add Earthquakes
+	earthquake.addTo(myMap);
+
+});
