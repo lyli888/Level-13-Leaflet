@@ -5,12 +5,12 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.g
 // Retrieve Data
 d3.json(link).then(function(response){
 
+    //Fill Array of Arrays
     for (var i = 0; i < response.features.length; i++){
       var place = response.features[i].properties.place
       var mag = response.features[i].properties.mag
       var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
       var depth = [response.features[i].geometry.coordinates[2]
-      var circleShape;
     }
 
     console.log(location);
@@ -20,6 +20,7 @@ d3.json(link).then(function(response){
 });
 
 function createMap(earthquakes) {
+
 
     // Define satelitemap and darkmap layers
     var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
