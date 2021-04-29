@@ -1,3 +1,48 @@
+// Link for USGS Dataset: All Earthquakes in the Past Week
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+// Retrieve Data & Draw Circles Depending For Each Earthquake Depending On Intensity
+d3.json(link).then(function(response){
+
+    //Fill Array of Arrays & Initialize Circle Color
+    for (var i = 0; i < response.features.length; i++) {
+    var place = response.features[i].properties.place
+    var mag = response.features[i].properties.mag
+    var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
+    var depth = [response.features[i].geometry.coordinates[2]
+    var circleColor;
+	console.log(location);
+	
+		//Set Circle Color 
+		if(depth > 5){
+			circleColor = "black"; 
+		}
+		if(depth >= 5 & depth <5){
+			circleColor = "red";
+		}
+		if(depth >= 3 && depth < 4){
+			circleColor = "orange";
+		}
+		if(depth >= 2 && depth < 3){
+			circleColor =  "yellow";
+		}
+		if(depth >= 1 && depth < 2){
+			circleColor = "FFFF99";
+		}
+		if(depth < 1){
+			circleColor = "white";
+		}
+
+
+	//Create Earthquake Circles
+	var earthquake = L.circleMarker(location, {
+		color: "pink",
+		fillColor: circleColor,
+		radius: mag * 10
+    });
+		
+});						
+
 //Initialize Map
 var myMap = L.map("map", {
     center: [0 , 0],
@@ -41,52 +86,5 @@ L.control.layers(baseMaps, overlayMaps, {
 var legend = L.control({position: 'bottomright'});
 legend.addTo(myMap);
 
-// Link for USGS Dataset: All Earthquakes in the Past Week
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
-
-// Retrieve Data & Draw Circles Depending For Each Earthquake Depending On Intensity
-d3.json(link).then(function(response){
-
-    //Fill Array of Arrays & Initialize Circle Color
-    for (var i = 0; i < response.features.length; i++) {
-    var place = response.features[i].properties.place
-    var mag = response.features[i].properties.mag
-    var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
-    var depth = [response.features[i].geometry.coordinates[2]
-    var circleColor;
-	
-	//Verify Data Collection From JSON Object
-	console.log(location);
-	
-	//Set Circle Color 
-	if(depth > 5){
-		circleColor = "black"; 
-	}
-	if(depth >= 5 & depth <5){
-		circleColor = "red";
-	}
-	if(depth >= 3 && depth < 4){
-		circleColor = "orange";
-	}
-	if(depth >= 2 && depth < 3){
-		circleColor =  "yellow";
-	}
-	if(depth >= 1 && depth < 2){
-		circleColor = "FFFF99";
-	}
-	if(depth < 1){
-		circleColor = "white";
-	}
-
-
-	//Make Each Earthquake Circle
-	var earthquake = L.circleMarker(location, {
-		color: "pink",
-		fillColor: circleColor,
-		radius: mag * 10
-    });
-
-	earthquake.addTo(myMap);
-		
-});						
-
+//Add Earthquakes
+earthquake.addTo(myMap);
