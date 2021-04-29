@@ -49,30 +49,27 @@ d3.json(link).then(function(response){
     var mag = response.features[i].properties.mag
     var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
     var depth = [response.features[i].geometry.coordinates[2]
-    var circleFill;
+	}
 
-	console.log(location);
-	
 		//Set Circle Fill Color By Depth
 		if(depth > 5){
-			circleFill = "black"; 
+			var circleFill = "black"; 
 		}
 		if(depth >= 5 & depth <5){
-			circleFill = "red";
+			var circleFill = "red";
 		}
 		if(depth >= 3 && depth < 4){
-			circleFill = "orange";
+			var circleFill = "orange";
 		}
 		if(depth >= 2 && depth < 3){
-			circleFill =  "yellow";
+			var circleFill =  "yellow";
 		}
 		if(depth >= 1 && depth < 2){
-			circleFill = "FFFF99";
+			var circleFill = "FFFF99";
 		}
 		if(depth < 1){
-			circleFill = "white";
+			var circleFill = "white";
 		}
-
 
 	//Create Earthquake Circles 
 	var earthquake = L.circleMarker(location, {
