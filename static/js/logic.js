@@ -1,6 +1,6 @@
 
-// Link for USGS Dataset: Significant Earthquakes in the Past Month
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
+// Link for USGS Dataset: All Earthquakes in the Past Week
+var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Retrieve Data
 d3.json(link, function(data) {
