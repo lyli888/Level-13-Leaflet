@@ -41,7 +41,7 @@ function createMap(earthquakes) {
     var myMap = L.map("map", {
       center: [31.57853542647338,-99.580078125],
       zoom: 3,
-      layers: [satelitemap, earthquakes]
+      layers: [sateliteMap, earthquakes]
     });
   
     // Create a layer control
@@ -53,5 +53,6 @@ function createMap(earthquakes) {
   
     var legend = L.control({position: 'bottomright'});
       
-// Add Map Legend
-legend.addto(Map);
+    // Add Map Legend
+    legend.addTo(myMap);
+};
