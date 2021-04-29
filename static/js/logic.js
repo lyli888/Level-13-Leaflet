@@ -23,23 +23,49 @@ d3.json(link, function(data) {
 
 });
 
-function createFeatures(earthquakeData) {
+function createMap(earthquakes) {
 
-    var earthquakes = L.geoJSON(earthquakeData, {
-    
-   onEachFeature : function (feature, layer) {
-  
-      layer.bindPopup("<h3>" + feature.properties.place +
-        "</h3><hr><p>" + new Date(feature.properties.time) + "</p>" + "<p> Magnitude: " +  feature.properties.mag + "</p>")
-      },     pointToLayer: function (feature, latlng) {
-        return new L.circle(latlng,
-          {radius: markerSize(feature.properties.mag),
-          fillColor: markerColor(feature.properties.mag),
-          fillOpacity: 1,
-          stroke: false,
-      })
-    }
+    // Define satelitemap and darkmap layers
+    var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "mapbox.satellite",
+      accessToken: API_KEY
     });
+  
+    var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "mapbox.dark",
+      accessToken: API_KEY
+    });
+  
+    // baseMaps holds our base layers
+    var baseMaps = {
+      "Satelite Map": sateliteMap,
+      "Dark Map": darkMap
+    };
+  
+    // overlapMaps holds earthquake layer
+    var overlayMaps = {
+      Earthquakes: earthquakes
+    };
+  
+    // Create our map, giving it the satelitemap and earthquakes layers to display on load
+    var myMap = L.map("map", {
+      center: [31.57853542647338,-99.580078125],
+      zoom: 3,
+      layers: [satelitemap, earthquakes]
+    });
+  
+    // Create a layer control
+    // Pass in our baseMaps and overlayMaps
+    // Add the layer control to the map
+    L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false
+    }).addTo(myMap);
+  
+    var legend = L.control({position: 'bottomright'});
       
 // Add Map Legend
 legend.addto(Map);
