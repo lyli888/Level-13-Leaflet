@@ -10,34 +10,34 @@ d3.json(link).then(function(response){
     var mag = response.features[i].properties.mag
     var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
     var depth = [response.features[i].geometry.coordinates[2]
-    var circleColor;
+    var circleFill;
 	console.log(location);
 	
 		//Set Circle Color 
 		if(depth > 5){
-			circleColor = "black"; 
+			circleFill = "black"; 
 		}
 		if(depth >= 5 & depth <5){
-			circleColor = "red";
+			circleFill = "red";
 		}
 		if(depth >= 3 && depth < 4){
-			circleColor = "orange";
+			circleFill = "orange";
 		}
 		if(depth >= 2 && depth < 3){
-			circleColor =  "yellow";
+			circleFill =  "yellow";
 		}
 		if(depth >= 1 && depth < 2){
-			circleColor = "FFFF99";
+			circleFill = "FFFF99";
 		}
 		if(depth < 1){
-			circleColor = "white";
+			circleFill = "white";
 		}
 
 
-	//Create Earthquake Circles
+	//Create Earthquake Circles 
 	var earthquake = L.circleMarker(location, {
 		color: "pink",
-		fillColor: circleColor,
+		fillColor: circleFill,
 		radius: mag * 10
     });
 		
