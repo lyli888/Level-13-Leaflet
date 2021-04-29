@@ -11,5 +11,7 @@ var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significan
 d3.json(link, function(data) {
 
 
-    
+
 });
+
+legend.addto(Map);
