@@ -3,7 +3,15 @@
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Retrieve Data
-d3.json(link, function(data) {
+d3.json(link).then(function(response){
+
+    for (var i = 0; i < response.features.length; i++){
+      var place = response.features[i].properties.place
+      var mag = response.features[i].properties.mag
+      var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[i]]
+      var depth = [response.features[i].geometry.coordinates[2]
+      var circleShape;
+    }
 
     createMap(data.features);
 
