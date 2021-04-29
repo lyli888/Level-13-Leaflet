@@ -1,6 +1,4 @@
-# Leaflet Homework - Visualizing Data with Leaflet
-
-## Your task is to visualize an earthquake data set.
+# Visualizing Earthquake Data with Leaflet
 
 1. **Get your data set**
 
