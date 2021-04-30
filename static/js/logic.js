@@ -1,43 +1,6 @@
 
 
-//Regular Map
-var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-	attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-	maxZoom: 18,
-	id: "mapbox.satellite",
-	accessToken: API_KEY
-});
 
-//Dark Map
-var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-  maxZoom: 18,
-  id: "mapbox.dark",
-  accessToken: API_KEY
-});
-
-//Add Layers
-var baseMaps = {
-  "Satelite Map": sateliteMap,
-  "Dark Map": darkMap
-}
-
-//Initialize Map
-var myMap = L.map("map", {
-	//Philadelphia Coordinates
-	center: [39.9526, 75.1652],
-	zoom: 2,
-	layers: [baseMaps, earthquakes]
-});
-
-//Toggle Menu
-L.control.layers(baseMaps, overlayMaps, {
-  collapsed: false
-}).addTo(myMap);
-
-//Legend
-var legend = L.control({position: 'bottomright'});
-legend.addTo(myMap);
 
 
 // Link for USGS Dataset: All Earthquakes in the Past Week
@@ -81,7 +44,46 @@ d3.json(link).then(function(response){
 		radius: mag * 10
     });
 
-});
+	//Regular Map
+	var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+		attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+		maxZoom: 18,
+		id: "mapbox.satellite",
+		accessToken: API_KEY
+	});
+
+	//Dark Map
+	var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
+  		attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+  		maxZoom: 18,
+  		id: "mapbox.dark",
+  		accessToken: API_KEY
+	});
+
+	//Add Layers
+	var baseMaps = {
+  	"Satelite Map": sateliteMap,
+  	"Dark Map": darkMap
+	}
+
+	//Initialize Map
+	var myMap = L.map("map", {
+		//Philadelphia Coordinates
+		center: [39.9526, 75.1652],
+		zoom: 2,
+		layers: [baseMaps, earthquakes]
+	});
+
+	//Toggle Menu
+	L.control.layers(baseMaps, overlayMaps, {
+  		collapsed: false
+	}).addTo(myMap);
+
+	//Legend
+	var legend = L.control({position: 'bottomright'});
+	legend.addTo(myMap);
 							
-//Add Earthquakes
-earthquakes.addTo(myMap);
+	//Add Earthquakes
+	earthquakes.addTo(myMap);
+
+});
