@@ -1,6 +1,7 @@
 //Initialize Map
 var myMap = L.map("map", {
-	center: [0 , 0],
+	//Philadelphia Coordinates
+	center: [39.9526, 75.1652],
 	zoom: 2,
 	layers: [sateliteMap, earthquakes]
 });
