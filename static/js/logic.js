@@ -12,24 +12,24 @@ d3.json(link).then(function(response){
     var depth = [response.features[i].geometry.coordinates[2]]
 	}
 
-		//Set Circle Fill Color By Depth
-		if(depth > 5){
+		//Set Circle Fill Color By Depth (Range 0-250)
+		if(depth > 250){
 			var circleFill = "black"; 
 		}
-		if(depth >= 5 & depth <5){
+		if(depth >= 150 & depth < 250){
+			var circleFill = "purple";
+		}
+		if(depth >= 100 && depth < 150){
 			var circleFill = "red";
 		}
-		if(depth >= 3 && depth < 4){
-			var circleFill = "orange";
+		if(depth >= 5 && depth < 100){
+			var circleFill =  "orange";
 		}
-		if(depth >= 2 && depth < 3){
-			var circleFill =  "yellow";
+		if(depth >= 0 && depth < 5){
+			var circleFill = "yellow";
 		}
-		if(depth >= 1 && depth < 2){
-			var circleFill = "FFFF99";
-		}
-		if(depth < 1){
-			var circleFill = "white";
+		if(depth < 0){
+			var circleFill = "green";
 		}
 
 	//Create Earthquake Circles 
