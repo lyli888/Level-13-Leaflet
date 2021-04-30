@@ -1,8 +1,8 @@
 // Link for USGS Dataset: All Earthquakes in the Past Week
-var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Retrieve Data & Draw Execute Script
-d3.json(link).then(function(response){
+d3.json(geolink).then(function(response){
 
     //Fill Array of Arrays & Initialize Circle Color
     for (var i = 0; i < response.features.length; i++) {
