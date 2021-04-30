@@ -1,10 +1,10 @@
 // Link for USGS Dataset: All Earthquakes in the Past Week
 var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Retrieve Data & Draw Execute Script
+// Retrieve Data & Execute Script
 d3.json(geolink).then(function(response){
 
-    //Fill Array of Arrays & Initialize Circle Color
+    //Organize Objects From JSON Response Into Variables
     for (var i = 0; i < response.features.length; i++) {
     var place = response.features[i].properties.place
     var mag = response.features[i].properties.mag
@@ -17,7 +17,7 @@ d3.json(geolink).then(function(response){
 			var circleFill = "black"; 
 		}
 		if(depth >= 150 & depth < 250){
-			var circleFill = "purple";
+			var circleFill = "gray";
 		}
 		if(depth >= 100 && depth < 150){
 			var circleFill = "red";
