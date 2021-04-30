@@ -76,7 +76,7 @@ d3.json(link).then(function(response){
 	var earthquake = L.circleMarker(location, {
 		color: "pink",
 		fillColor: circleFill,
-		radius: mag * 10
+		radius: (mag * 10) ** 2
     });
 
 });
