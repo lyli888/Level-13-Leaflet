@@ -1,10 +1,4 @@
-//Initialize Map
-var myMap = L.map("map", {
-	//Philadelphia Coordinates
-	center: [39.9526, 75.1652],
-	zoom: 2,
-	layers: [sateliteMap, earthquakes]
-});
+
 
 //Regular Map
 var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -27,6 +21,14 @@ var baseMaps = {
   "Satelite Map": sateliteMap,
   "Dark Map": darkMap
 }
+
+//Initialize Map
+var myMap = L.map("map", {
+	//Philadelphia Coordinates
+	center: [39.9526, 75.1652],
+	zoom: 2,
+	layers: [baseMaps, earthquakes]
+});
 
 //Toggle Menu
 L.control.layers(baseMaps, overlayMaps, {
