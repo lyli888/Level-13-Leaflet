@@ -73,13 +73,13 @@ d3.json(link).then(function(response){
 		}
 
 	//Create Earthquake Circles 
-	var earthquake = L.circleMarker(location, {
+	var earthquakes = L.circleMarker(location, {
 		color: "pink",
 		fillColor: circleFill,
-		radius: (mag * 10) ** 2
+		radius: mag * 10
     });
 
 });
 							
 //Add Earthquakes
-earthquake.addTo(myMap);
+earthquakes.addTo(myMap);
