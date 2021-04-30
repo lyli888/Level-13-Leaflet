@@ -1,12 +1,7 @@
-
-
-
-
-
 // Link for USGS Dataset: All Earthquakes in the Past Week
 var link = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Retrieve Data & Draw Circles Depending For Each Earthquake Depending On Intensity
+// Retrieve Data & Draw Execute Script
 d3.json(link).then(function(response){
 
     //Fill Array of Arrays & Initialize Circle Color
@@ -60,13 +55,13 @@ d3.json(link).then(function(response){
   		accessToken: API_KEY
 	});
 
-	//Add Layers
+	//Regular & Dark Map Combined
 	var baseMaps = {
   	"Satelite Map": sateliteMap,
   	"Dark Map": darkMap
 	}
 
-	//Initialize Map
+	//Put It All Together Into 1 Map With Layers
 	var myMap = L.map("map", {
 		//Philadelphia Coordinates
 		center: [39.9526, 75.1652],
@@ -74,16 +69,14 @@ d3.json(link).then(function(response){
 		layers: [baseMaps, earthquakes]
 	});
 
-	//Toggle Menu
+	//Add Toggle Menu
 	L.control.layers(baseMaps, overlayMaps, {
   		collapsed: false
 	}).addTo(myMap);
 
-	//Legend
+	//Add Legend
 	var legend = L.control({position: 'bottomright'});
 	legend.addTo(myMap);
-							
-	//Add Earthquakes
-	earthquakes.addTo(myMap);
+	
 
 });
