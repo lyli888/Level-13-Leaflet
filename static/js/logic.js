@@ -34,8 +34,9 @@ d3.json(geolink).then(function(response){
 
 	//Create Earthquake Circles 
 	var earthquakes = L.circleMarker(location, {
-		color: "pink",
+		color: "black",
 		fillColor: circleFill,
+		opacity: 0.5,
 		radius: mag * 10
     });
 
