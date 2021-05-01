@@ -4,7 +4,7 @@ var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_wee
 // Retrieve Data & Execute Script
 d3.json(geolink).then(function(response){
 
-	console.log(data);
+    console.log(data);
 
     //Organize Objects From JSON Response Into Variables
     for (var i = 0; i < response.features.length; i++) {
