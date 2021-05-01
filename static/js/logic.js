@@ -4,6 +4,8 @@ var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_wee
 // Retrieve Data & Execute Script
 d3.json(geolink).then(function(response){
 
+	console.log(data);
+
     //Organize Objects From JSON Response Into Variables
     for (var i = 0; i < response.features.length; i++) {
     var place = response.features[i].properties.place
@@ -37,13 +39,16 @@ d3.json(geolink).then(function(response){
 		color: "black",
 		fillColor: circleFill,
 		opacity: 0.5,
-		radius: mag * 10
+		//Account for earthquakes with magnitude=0
+		radius: ((mag + 1) ** 2) 
     });
 
 	//Regular Map
 	var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
 		attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+		tileSize: 500,
 		maxZoom: 18,
+		zoomOffset: -1,
 		id: "mapbox.satellite",
 		accessToken: API_KEY
 	});
