@@ -15,22 +15,19 @@ d3.json(geolink).then(function(response){
 	}
 
 		//Set Circle Fill Color By Depth (Range 0-300)
-		if(depth > 250){
+		if(depth >= 150){
 			var circleFill = "black"; 
 		}
-		if(depth >= 150 & depth < 250){
-			var circleFill = "gray";
-		}
-		if(depth >= 100 && depth < 150){
+		if(depth >= 50 && depth < 150){
 			var circleFill = "red";
 		}
-		if(depth >= 5 && depth < 100){
+		if(depth >= 5 && depth < 50){
 			var circleFill =  "orange";
 		}
 		if(depth >= 0 && depth < 5){
 			var circleFill = "yellow";
 		}
-		if(depth < 0){
+		if(depth <= 0){
 			var circleFill = "green";
 		}
 
@@ -44,7 +41,7 @@ d3.json(geolink).then(function(response){
     	});
 
 	//Regular Map
-	L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+	var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
   		attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
   		tileSize: 512,
   		maxZoom: 18,
