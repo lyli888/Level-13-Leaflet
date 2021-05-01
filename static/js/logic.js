@@ -38,7 +38,7 @@ d3.json(geolink).then(function(response){
 		opacity: 0.5,
 		//Account for earthquakes with magnitude=0
 		radius: ((mag + 1) ** 2) 
-    	});
+    });
 
 	//Regular Map
 	var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -60,8 +60,8 @@ d3.json(geolink).then(function(response){
 
 	//Regular & Dark Map Combined
 	var baseMaps = {
-  	"Satelite Map": sateliteMap,
-  	"Dark Map": darkMap
+  		"Light Map": sateliteMap,
+  		"Dark Map": darkMap
 	}
 
 	//Put It All Together Into 1 Map With Layers
@@ -73,9 +73,8 @@ d3.json(geolink).then(function(response){
 	});
 
 	//Add Toggle Menu
-	L.control.layers(baseMaps, overlayMaps, {
-  		collapsed: false
-	}).addTo(myMap);
+	L.control.layers(lightMap, darkMap).addTo(map);
+
 
 	//Add Legend
 	var legend = L.control({position: 'bottomright'});
