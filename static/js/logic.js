@@ -14,7 +14,7 @@ d3.json(geolink).then(function(response){
     var depth = [response.features[i].geometry.coordinates[2]]
 	}
 
-		//Set Circle Fill Color By Depth (Range 0-250)
+		//Set Circle Fill Color By Depth (Range 0-300)
 		if(depth > 250){
 			var circleFill = "black"; 
 		}
@@ -41,7 +41,7 @@ d3.json(geolink).then(function(response){
 		opacity: 0.5,
 		//Account for earthquakes with magnitude=0
 		radius: ((mag + 1) ** 2) 
-    });
+    	});
 
 	//Regular Map
 	var sateliteMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -85,3 +85,5 @@ d3.json(geolink).then(function(response){
 	legend.addTo(myMap);
 
 });
+
+//TODO Add PoUp Markers
