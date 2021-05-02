@@ -31,7 +31,7 @@ var myMap = L.map("map", {
 });
 
 //Add Toggle Menu
-L.control.layers(lightMap, darkMap).addTo(map);
+L.control.layers(lightMap, darkMap).addTo(myMap);
 
 
 //Add Legend
@@ -71,7 +71,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 		}
 
 	//Create Earthquake Circles 
-	var earthquakes = L.circleMarker(location, {
+	var quakeCircles = L.circleMarker(location, {
 		color: "black",
 		fillColor: circleFill,
 		opacity: 0.5,
@@ -79,7 +79,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 		radius: ((mag + 1) ** 2) 
     });
 
-	earthquakes.addTo(myMap);
+	quakeCircles.addTo(myMap);
 
 });
 
