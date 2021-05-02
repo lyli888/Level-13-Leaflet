@@ -2,7 +2,8 @@
 var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 // Retrieve Data & Execute Script
-d3.json(geolink).then(function(response){
+
+d3.json(geolink, function(data) {
 
     console.log(data);
 
