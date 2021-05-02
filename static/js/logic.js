@@ -60,7 +60,7 @@ d3.json(geolink).then(function(response){
 
 	//Regular & Dark Map Combined
 	var baseMaps = {
-  		"Light Map": sateliteMap,
+  		"Light Map": lightMap,
   		"Dark Map": darkMap
 	}
 
