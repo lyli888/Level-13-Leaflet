@@ -1,11 +1,48 @@
-// Link for USGS Dataset: All Earthquakes in the Past Week
-var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+// Retrieve Data & Execute Script, All Earthquakes past week
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(createMarkers);
 
-// Retrieve Data & Execute Script
+function createMarkers(response) {
 
-d3.json(geolink, function(data) {
+	console.log(data);
 
-    console.log(data);
+}
+
+function createMap(earthquakes) {
+
+	// Create the tile layer that will be the background of our map
+	var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+	  attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+	  maxZoom: 18,
+	  id: "light-v10",
+	  accessToken: API_KEY
+	});
+  
+	// Create a baseMaps object to hold the lightmap layer
+	var baseMaps = {
+	  "Light Map": lightMap
+	};
+  
+	// Create an overlayMaps object to hold the bikeStations layer
+	var overlayMaps = {
+	  "Earthquakes": earthquakes
+	};
+  
+	// Create the map object with options
+	var myMap = L.map("map-id", {
+	  center: [40.73, -74.0059],
+	  zoom: 12,
+	  layers: [lightmap, earthquakes]
+
+	});
+  
+	// Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
+	L.control.layers(baseMaps, overlayMaps, {
+		collapsed: false
+	}).addTo(myMap);
+
+	}
+
+
 
     //Organize Objects From JSON Response Into Variables
     for (var i = 0; i < response.features.length; i++) {
@@ -42,14 +79,12 @@ d3.json(geolink, function(data) {
     });
 
 	//Regular Map
-	var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-  		attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-  		tileSize: 512,
-  		maxZoom: 18,
-  		zoomOffset: -1,
-  		id: "mapbox/streets-v11",
-  		accessToken: API_KEY
-	});
+	var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+    	attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+    	maxZoom: 18,
+    	id: "light-v10",
+    	accessToken: API_KEY
+  	});
 
 	//Dark Map
 	var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
@@ -78,9 +113,6 @@ d3.json(geolink, function(data) {
 
 
 	//Add Legend
-	var legend = L.control({position: 'bottomright'});
-	legend.addTo(myMap);
-
-});
+	
 
 //TODO Add PoUp Markers
