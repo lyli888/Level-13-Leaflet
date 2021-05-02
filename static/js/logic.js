@@ -1,87 +1,65 @@
-//Regular Map
-var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-	attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
-	tileSize: 512,
-	maxZoom: 18,
-	zoomOffset: -1,
-	id: "mapbox/streets-v11",
-	accessToken: API_KEY
-});
+function createMap(earthquakes) {
 
-//Dark Map
-var darkMap = L.tileLayer("https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}", {
-	attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
-	maxZoom: 18,
-	id: "mapbox.dark",
-	accessToken: API_KEY
-});
-
-//Regular & Dark Map Combined
-var baseMaps = {
-	"Light Map": lightMap,
-	"Dark Map": darkMap
-};
-
-//Put It All Together Into 1 Map With Layers
-var myMap = L.map("map", {
-  //Philadelphia Coordinates
-  center: [39.9526, 75.1652],
-  zoom: 2,
-  layers: [baseMaps, earthquakes]
-});
-
-//Add Toggle Menu
-L.control.layers(lightMap, darkMap).addTo(myMap);
-
-
-//Add Legend
-var legend = L.control({position: 'bottomright'});
-legend.addTo(myMap);
-
-
-
-
-// Retrieve Data & Make Circles
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(response){
-
-
-    //Organize Objects From JSON Response Into Variables
-    for (var i = 0; i < response.features.length; i++) {
-    var place = response.features[i].properties.place
-    var mag = response.features[i].properties.mag
-    var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]]
-    var depth = [response.features[i].geometry.coordinates[2]]
-	}
-
-		//Set Circle Fill Color By Depth (Range 0-300)
-		if(depth >= 150){
-			var circleFill = "black"; 
-		}
-		if(depth >= 50 && depth < 150){
-			var circleFill = "red";
-		}
-		if(depth >= 5 && depth < 50){
-			var circleFill =  "orange";
-		}
-		if(depth >= 0 && depth < 5){
-			var circleFill = "yellow";
-		}
-		if(depth <= 0){
-			var circleFill = "green";
-		}
-
-	//Create Earthquake Circles 
-	var quakeCircles = L.circleMarker(location, {
-		color: "black",
-		fillColor: circleFill,
-		opacity: 0.5,
-		//Account for earthquakes with magnitude=0
-		radius: ((mag + 1) ** 2) 
+    // Create the tile layer that will be the background of our map
+    var lightmap = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+      attribution: "Map data &copy; <a href=\"https://www.openstreetmap.org/\">OpenStreetMap</a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA</a>, Imagery © <a href=\"https://www.mapbox.com/\">Mapbox</a>",
+      maxZoom: 18,
+      id: "light-v10",
+      accessToken: API_KEY
     });
+  
+    // Create a baseMaps object to hold the lightmap layer
+    var baseMaps = {
+      "Light Map": lightmap
+    };
+  
+    // Create an overlayMaps object to hold the earthquakes layer
+    var overlayMaps = {
+      "Earthquakes": earthquakes
+    };
+  
+    // Create the map object with options
+    var myMap = L.map("map-id", {
+      center: [40.73, -74.0059],
+      zoom: 12,
+      layers: [lightmap, earthquakes]
+    });
+  
+    // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
+    L.control.layers(baseMaps, overlayMaps, {
+      collapsed: false
+    }).addTo(myMap);
+  }
+  
+  function createMarkers(response) {
+  
+    // Initialize an array to hold earthquake markers
+    var quakeMarkers = [];
+  
+    // Pull data from response
+    for (var i = 0; i < response.features.length; i++) {
+      var place = response.features[i].properties.place;
+    	var mag = response.features[i].properties.mag;
+    	var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
+    	var depth = [response.features[i].geometry.coordinates[2]];
+		  var circleColor;
 
-	quakeCircles.addTo(myMap);
+		  console.log(location);
+  
+      // For each station, create a marker and bind a popup with the station's name
+      var quakeMarker = L.marker([response.features[i].geometry.coordinates[0],response.features[i].geometry.coordinates[1]])
+      .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>");
+  
+      // Add the marker to the quakeMarkers array
+      quakeMarkers.push(quakeMarker);
 
-});
+    }
 
-
-//TODO Add PoUp Markers
+    // Create a layer group made from the quake markers array, pass it into the createMap function
+    createMap(L.layerGroup(quakeMarkers));
+  }
+  
+  
+  // Perform an API call to the USGS API to get earthquake information. Call createMarkers when complete
+  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").then(createMarkers);
+  
