@@ -1,10 +1,7 @@
-// Link for USGS Dataset: All Earthquakes in the Past Week
-var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Retrieve Data & Execute Script
-d3.json(geolink).then(function(response){
+// Retrieve Data & Make Circles
+d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(function(response){
 
-    console.log(data);
 
     //Organize Objects From JSON Response Into Variables
     for (var i = 0; i < response.features.length; i++) {
@@ -39,6 +36,10 @@ d3.json(geolink).then(function(response){
 		//Account for earthquakes with magnitude=0
 		radius: ((mag + 1) ** 2) 
     });
+
+	earthquakes.addTo(myMap);
+
+});
 
 	//Regular Map
 	var lightMap = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
@@ -80,6 +81,5 @@ d3.json(geolink).then(function(response){
 	var legend = L.control({position: 'bottomright'});
 	legend.addTo(myMap);
 
-});
 
 //TODO Add PoUp Markers
