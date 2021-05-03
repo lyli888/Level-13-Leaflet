@@ -62,7 +62,6 @@ function createMarkers(response) {
     //Earthquake Circle Markers
     var quakeCircles = [];
   
-  
     // Pull data from response
     for (var i = 0; i < response.features.length; i++) {
       var place = response.features[i].properties.place;
@@ -97,7 +96,6 @@ function createMarkers(response) {
     createMap(L.layerGroup(quakeMarkers, quakeCircles));
 
   }
-  
   
   // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
   d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson").then(createMarkers);
