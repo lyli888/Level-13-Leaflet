@@ -34,16 +34,16 @@ function createMap(earthquakes) {
 
 //Circle Marker Radius Function
 function quakeRadius(mag) {
-  return ((mag+1) ** 2) * 10000;
+  return ((mag+1) ** 2) * 50000;
 }
 
 //Circle Marker Color Function
-function quakeColor(mag) {
+function quakeColor(depth) {
   if (depth <= 150) {
       return "FF0000";
-  } else if (mag <= 100) {
+  } else if (depth <= 100) {
       return "#FFA500";
-  } else if (mag <= 50) {
+  } else if (depth <= 50) {
       return "#FFFF00";
   } else if (depth <= 10) {
       return "#ff0000";
@@ -76,11 +76,20 @@ function createMarkers(response) {
       // Add the marker to the quakeMarkers array
       quakeMarkers.push(quakeMarker);
 
-    }
+      //Create Earthquake Circles 
+		  var quakeCircles = L.circleMarker(location, {
+			  color: "black",
+			  fillColor: quakeColor(depth),
+			  opacity: 0.5,
+			  //Account for earthquakes with magnitude=0
+			  radius: quakeRadius(mag)
+    	  });
+
+      }
 
     // Create a layer group made from the quake markers array, pass it into the createMap function
-    createMap(L.layerGroup(quakeMarkers));
-    createMap(L.layerGroup(circleMarkers));
+    createMap(L.layerGroup(quakeMarkers, quakeCircles));
+
   }
   
   
