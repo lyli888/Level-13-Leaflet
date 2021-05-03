@@ -58,6 +58,10 @@ function createMarkers(response) {
   
     //Earthquake BindUp Markers
     var quakeMarkers = [];
+
+    //Earthquake Circle Markers
+    var quakeCircles = [];
+  
   
     // Pull data from response
     for (var i = 0; i < response.features.length; i++) {
@@ -77,13 +81,15 @@ function createMarkers(response) {
       quakeMarkers.push(quakeMarker);
 
       //Create Earthquake Circles 
-		  var quakeCircles = L.circleMarker(location, {
+		  var quakeCircle = L.circleMarker(location, {
 			  color: "black",
 			  fillColor: quakeColor(depth),
 			  opacity: 0.5,
 			  //Account for earthquakes with magnitude=0
 			  radius: quakeRadius(mag)
     	  });
+
+      quakeCircles.push(quakeCircle);
 
       }
 
