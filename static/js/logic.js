@@ -30,6 +30,12 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
+  var legend = L.control({position: 'bottomright'});
+
+  legend.addTo(myMap);
+
+  L.mapbox.legendControl({ position: 'bottomleft' }).addLegend('<strong>My walk from the White House to the hill!</strong>').addTo(myMap);
+
 }
   
   function createMarkers(response) {
