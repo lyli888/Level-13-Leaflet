@@ -81,7 +81,7 @@ function createMarkers(response) {
       quakeMarkers.push(quakeMarker);
 
       //Create Earthquake Circles 
-		  var quakeCircle = L.circleMarker(location, {
+		  var quakeCircle = L.circle(location, {
 			  color: "black",
 			  fillColor: quakeColor(depth),
 			  opacity: 0.5,
