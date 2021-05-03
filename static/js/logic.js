@@ -15,7 +15,7 @@ function createMap(earthquakes) {
 
   // Create an overlayMaps object to hold the earthquakes layer
   var overlayMaps = {
-  "Earthquakes": earthquakes
+    "Earthquakes": earthquakes
   };
 
   // Create the map object with options
@@ -24,7 +24,6 @@ function createMap(earthquakes) {
     zoom: 12,
     layers: [lightmap, earthquakes]
   });
-
 
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
@@ -35,7 +34,7 @@ function createMap(earthquakes) {
   
   function createMarkers(response) {
   
-    // Initialize an array to hold earthquake markers
+    //Earthquake BindUp Markers
     var quakeMarkers = [];
   
     // Pull data from response
