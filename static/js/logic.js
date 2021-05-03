@@ -87,7 +87,7 @@ function createMarkers(response) {
 			  opacity: 0.5,
 			  //Account for earthquakes with magnitude=0
 			  radius: quakeRadius(mag)
-    	  });
+    	});
 
       quakeCircles.push(quakeCircle);
 
