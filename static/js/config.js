@@ -1,2 +1,2 @@
 // Mapbox API Key
-const API_KEY = "YOUR-API-KEY-HERE";
+const API_KEY = "YOUR_API_KEY_HERE";
