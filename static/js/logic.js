@@ -30,15 +30,29 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
-  var legend = L.control({position: 'bottomright'});
+}
 
-  legend.addTo(myMap);
+function quakeRadius(mag) {
+  return ((mag+1) **2) * 10000;
+}
 
-  L.mapbox.legendControl({ position: 'bottomleft' }).addLegend('<strong>My walk from the White House to the hill!</strong>').addTo(myMap);
-
+function quakeColor(mag) {
+  if (depth <= 150) {
+      return "FF0000";
+  } else if (mag <= 100) {
+      return "#FFA500";
+  } else if (mag <= 50) {
+      return "#FFFF00";
+  } else if (depth <= 10) {
+      return "#ff0000";
+  } else if (depth <= 1) {
+      return "#008000";
+  } else {
+      return "#000000";
+  };
 }
   
-  function createMarkers(response) {
+function createMarkers(response) {
   
     //Earthquake BindUp Markers
     var quakeMarkers = [];
@@ -64,6 +78,7 @@ function createMap(earthquakes) {
 
     // Create a layer group made from the quake markers array, pass it into the createMap function
     createMap(L.layerGroup(quakeMarkers));
+    createMap(L.layerGroup(circleMarkers));
   }
   
   
