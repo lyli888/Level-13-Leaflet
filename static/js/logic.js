@@ -41,15 +41,15 @@ function createMap(earthquakes) {
     for (var i = 0; i < response.features.length; i++) {
       var place = response.features[i].properties.place;
     	var mag = response.features[i].properties.mag;
-      var date = response.features[i].properties.date;
+      var date = response.features[i].properties.time;
     	var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
-    	var depth = [response.features[i].geometry.coordinates[2]];
+    	var depth = response.features[i].geometry.coordinates[2];
 
 		  console.log(location);
   
       // For each station, create a marker and bind a popup with the station's name
       var quakeMarker = L.marker(location)
-      .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>"+ "<h3><h3>Depth: " + response.features[i].properties.depth + "</h3>"+ "<h3><h3>Date: " + response.features[i].properties.depth + "</h3>");
+      .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>"+ "<h3><h3>Depth: " + response.features[i].geometry.coordinates[2] + "</h3>"+ "<h3><h3>Date: " + response.features[i].properties.time+ "</h3>");
   
       // Add the marker to the quakeMarkers array
       quakeMarkers.push(quakeMarker);
