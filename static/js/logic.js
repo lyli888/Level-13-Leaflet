@@ -62,6 +62,6 @@ function createMap(earthquakes) {
   }
   
   
-  // Perform an API call to the USGS API to get earthquake information. Call createMarkers when complete
-  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").then(createMarkers);
+  // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
+  d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson").then(createMarkers);
   
