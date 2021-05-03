@@ -13,22 +13,24 @@ function createMap(earthquakes) {
     "Light Map": lightmap
   };
 
-  // Create an overlayMaps object to hold the bikeStations layer
+  // Create an overlayMaps object to hold the earthquakes layer
   var overlayMaps = {
-    "Earthquakes": earthquakes
+  "Earthquakes": earthquakes
   };
 
   // Create the map object with options
-  var map = L.map("map-id", {
+  var myMap = L.map("map-id", {
     center: [40.73, -74.0059],
     zoom: 12,
     layers: [lightmap, earthquakes]
   });
 
+
   // Create a layer control, pass in the baseMaps and overlayMaps. Add the layer control to the map
   L.control.layers(baseMaps, overlayMaps, {
     collapsed: false
-  }).addTo(map);
+  }).addTo(myMap);
+
 }
   
   function createMarkers(response) {
