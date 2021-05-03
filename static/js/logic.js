@@ -32,10 +32,12 @@ function createMap(earthquakes) {
 
 }
 
+//Circle Marker Radius Function
 function quakeRadius(mag) {
-  return ((mag+1) **2) * 10000;
+  return ((mag+1) ** 2) * 10000;
 }
 
+//Circle Marker Color Function
 function quakeColor(mag) {
   if (depth <= 150) {
       return "FF0000";
