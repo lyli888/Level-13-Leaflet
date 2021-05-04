@@ -45,7 +45,7 @@ function createMarkers(response) {
 
     }//End of 1st FOR LOOP through geoJSON response object
     
-    // Create a layer group made from the quake markers array, pass to & call createMap
+    // Create layer groups from marker arrays & call map drawing functions
     createMap(L.layerGroup(quakeMarkers));
     addCircles(L.layerGroup(quakeCircles));
 } 
