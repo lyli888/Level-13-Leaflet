@@ -63,12 +63,12 @@ function createMarkers(response) {
     // Create a layer group made from the quake markers array, pass it into the createMap function
     createMap(L.layerGroup(quakeMarkers));
     addCircles(quakeMarkers);
-}
-  
-  function addCircles(quakeMarkers){
 
-    
-}
+    function addCircles(quakeMarkers){
+
+
+    }
+} 
 
   //Circle Marker Radius Function
 function quakeRadius(mag) {
