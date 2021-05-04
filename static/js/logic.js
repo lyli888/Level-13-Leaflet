@@ -13,10 +13,8 @@ var quakeCircles = [];
 // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
 d3.json(geolink).then(createMarkers);
 
- 
 //Creates & places markers w/ earthquake info, calls createMap
 function createMarkers(response) {
-
 
     // Pull data from response
     for (var i = 0; i < response.features.length; i++) {
@@ -28,17 +26,27 @@ function createMarkers(response) {
 
 		  console.log(location);
   
-      // For each station, create a marker and bind a popup with the station's name
+      //Marker With Popup
       var quakeMarker = L.marker(location)
       .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>"+ "<h3><h3>Depth: " + response.features[i].geometry.coordinates[2] + "</h3>"+ "<h3><h3>Date: " + response.features[i].properties.time+ "</h3>");
   
-      // Add the marker to the quakeMarkers array
+      //Markers ==> Array
       quakeMarkers.push(quakeMarker);
-    }//End of first FOR LOOP through geoJSON response object
+
+      //
+      var quakeCircle = L.circle(location, {
+          color: "000000",
+          fillColor: quakeColor(depth),
+          opacity: 0.5,
+          radius: quakeRadius(mag)
+      });
+
+      quakeCircles.push(quakeCircle);
+
+    }//End of 1st FOR LOOP through geoJSON response object
     
     // Create a layer group made from the quake markers array, pass to & call createMap
-    createMap(L.layerGroup(quakeMarkers));
-
+    createMap(L.layerGroup(quakeMarkers, quakeCircles));
 } 
 
 //Create Map function
@@ -75,7 +83,6 @@ function createMap(earthquakes) {
   }).addTo(myMap);
 
 }
-
 
 //Circle Marker Radius Function
 function quakeRadius(mag) {
