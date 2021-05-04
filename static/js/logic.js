@@ -1,3 +1,5 @@
+var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+
 function createMap(earthquakes) {
 
   // Create the tile layer that will be the background of our map
@@ -59,8 +61,6 @@ function createMarkers(response) {
     //Earthquake BindUp Markers
     var quakeMarkers = [];
 
-    //Earthquake Circle Markers
-    var quakeCircles = [];
   
     // Pull data from response
     for (var i = 0; i < response.features.length; i++) {
@@ -78,23 +78,10 @@ function createMarkers(response) {
   
       // Add the marker to the quakeMarkers array
       quakeMarkers.push(quakeMarker);
-
-      //Create Earthquake Circles 
-		  var quakeCircle = L.circle(location, {
-			  color: "black",
-			  fillColor: quakeColor(depth),
-			  opacity: 0.5,
-			  //Account for earthquakes with magnitude=0
-			  radius: quakeRadius(mag)
-    	});
-
-      quakeCircles.push(quakeCircle);
-
       }
 
     // Create a layer group made from the quake markers array, pass it into the createMap function
-    createMap(L.layerGroup(quakeMarkers, quakeCircles));
-
+    createMap(L.layerGroup(quakeMarkers));
   }
   
   // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
