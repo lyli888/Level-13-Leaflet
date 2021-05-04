@@ -37,6 +37,13 @@ function createMarkers(response) {
     addCircles(quakeMarkers);
     // Create a layer group made from the quake markers array, pass it into the createMap function
     createMap(L.layerGroup(quakeMarkers));
+
+    //Circle Function
+    function addCircles(quakeMarkers){
+
+      //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
+
+    }
     
 } 
 
@@ -75,13 +82,6 @@ function createMap(earthquakes) {
 
 }
 
-//Circle Function
-function addCircles(quakeMarkers){
-
-  //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
-
-
-}
 
 //Circle Marker Radius Function
 function quakeRadius(mag) {
