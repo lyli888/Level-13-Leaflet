@@ -46,7 +46,8 @@ function createMarkers(response) {
     }//End of 1st FOR LOOP through geoJSON response object
     
     // Create a layer group made from the quake markers array, pass to & call createMap
-    createMap(L.layerGroup(quakeMarkers, quakeCircles));
+    createMap(L.layerGroup(quakeMarkers));
+    quakeCircles.addTo(myMap);
 } 
 
 //Create Map function
@@ -86,20 +87,20 @@ function createMap(earthquakes) {
 
 //Circle Marker Radius Function
 function quakeRadius(mag) {
-  return ((mag+1) ** 2) * 50000;
+  return ((mag+1) ** 2) * 10000000;
 }
 
 //Circle Marker Color Function
 function quakeColor(depth) {
-  if (depth <= 150) {
-      return "FF0000";
-  } else if (depth <= 100) {
+  if (depth <= 1) {
+      return "#008000";
+  } else if (depth <= 5 && depth > 1) {
+      return "#FF0000";
+  } else if (depth <= 10 && depth > 5) {
       return "#FFA500";
-  } else if (depth <= 50) {
+  } else if (depth <= 50 && depth > 10) {
       return "#FFFF00";
-  } else if (depth <= 10) {
-      return "#ff0000";
-  } else if (depth <= 1) {
+  } else if (depth <= 150 && depth > 50) {
       return "#008000";
   } else {
       return "#000000";
