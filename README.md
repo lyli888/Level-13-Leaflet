@@ -1,6 +1,6 @@
 # GeoMapping Earthquake Data with Leaflet
 
-NOTE: For cybersecurity reasons, I have omitted my MapBox API key. Please obtain your own to run script. 
+##NOTE: For cybersecurity reasons, I have omitted my MapBox API key. Please obtain your own for free from [mapbox.com](https://docs.mapbox.com/help/getting-started/access-tokens/) to run script. See [screenshot](/EarthquakeMap.png) for project results.
 
 ## Get your data set
 
