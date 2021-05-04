@@ -35,28 +35,10 @@ function createMarkers(response) {
       // Add the marker to the quakeMarkers array
       quakeMarkers.push(quakeMarker);
     }//End of first FOR LOOP through geoJSON response object
-
     
     // Create a layer group made from the quake markers array, pass to & call createMap
     createMap(L.layerGroup(quakeMarkers));
 
-    //Call addCircles, pass in quakeMarkers array
-    addCircles(quakeMarkers);
-
-    function addCircles(quakeMarkers){
-      for(var index = 0; index < response.features.legnth; index++){
-        var place2 = response.features[i].properties.place;
-    	  var mag2 = response.features[i].properties.mag;
-        var date2 = response.features[i].properties.time;
-    	  var location2 = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
-    	  var depth2 = response.features[i].geometry.coordinates[2];
-
-        quakeCircles.addTo(myMap);
-
-      }//End of second looping through geoJSON response object
-      
-    }//End of second FOR LOOP through geoJSON response object
-    
 } 
 
 //Create Map function
