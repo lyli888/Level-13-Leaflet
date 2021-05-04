@@ -54,10 +54,8 @@ function createMarkers(response) {
         quakeCircles.addTo(myMap);
 
       }//End of second looping through geoJSON response object
-
       
-      
-  }
+    }//End of second FOR LOOP through geoJSON response object
     
 } 
 
