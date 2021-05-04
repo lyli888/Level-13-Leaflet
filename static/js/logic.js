@@ -1,5 +1,9 @@
-//Globally Accessible Link to GeoJSON data
+//Globally accessible Link to GeoJSON data
 var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+
+//Glonally accessible map variable
+
+var myMap;
 
 //Globally accessible quakeMarkers array
 var quakeMarkers = [];
@@ -41,9 +45,11 @@ function createMarkers(response) {
     //Circle Function
     function addCircles(quakeMarkers){
 
+      var quakeCircle = L.circle
+
       //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
 
-    }
+  }
     
 } 
 
@@ -69,7 +75,7 @@ function createMap(earthquakes) {
   };
 
   // Create the map object with options
-  var myMap = L.map("map-id", {
+  myMap = L.map("map-id", {
     center: [40.73, -74.0059],
     zoom: 12,
     layers: [lightmap, earthquakes]
