@@ -47,7 +47,7 @@ function createMarkers(response) {
     
     // Create a layer group made from the quake markers array, pass to & call createMap
     createMap(L.layerGroup(quakeMarkers));
-    quakeCircles.addTo(myMap);
+    addCircles(L.layerGroup(quakeCircles));
 } 
 
 //Create Map function
@@ -68,13 +68,14 @@ function createMap(earthquakes) {
 
   // Create an overlayMaps object to hold the earthquakes layer
   var overlayMaps = {
-    "Earthquakes": earthquakes
+    "Earthquakes": earthquakes,
   };
 
   // Create the map object with options
   myMap = L.map("map-id", {
     center: [40.73, -74.0059],
     zoom: 12,
+    minZoom: 0,
     layers: [lightmap, earthquakes]
   });
 
@@ -85,9 +86,13 @@ function createMap(earthquakes) {
 
 }
 
+function addCircles(quakeCircles){
+  quakeCircles.addTo(myMap);
+}
+
 //Circle Marker Radius Function
 function quakeRadius(mag) {
-  return ((mag+1) ** 2) * 10000000;
+  return ((mag+1) ** 2) * 30000;
 }
 
 //Circle Marker Color Function
