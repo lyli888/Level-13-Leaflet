@@ -45,11 +45,11 @@ function createMarkers(response) {
 
     function addCircles(quakeMarkers){
       for(var index = 0; index < response.features.legnth; index++){
-        var place = response.features[i].properties.place;
-    	  var mag = response.features[i].properties.mag;
-        var date = response.features[i].properties.time;
-    	  var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
-    	  var depth = response.features[i].geometry.coordinates[2];
+        var place2 = response.features[i].properties.place;
+    	  var mag2 = response.features[i].properties.mag;
+        var date2 = response.features[i].properties.time;
+    	  var location2 = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
+    	  var depth2 = response.features[i].geometry.coordinates[2];
 
         quakeCircles.addTo(myMap);
 
