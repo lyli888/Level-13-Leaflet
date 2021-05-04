@@ -2,7 +2,6 @@
 var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
 //Glonally accessible map variable
-
 var myMap;
 
 //Globally accessible quakeMarkers array
@@ -37,15 +36,24 @@ function createMarkers(response) {
       quakeMarkers.push(quakeMarker);
     }
 
-    //Add Circles to PopUp Markers
-    addCircles(quakeMarkers);
+    
     // Create a layer group made from the quake markers array, pass it into the createMap function
     createMap(L.layerGroup(quakeMarkers));
+
+    //Add Circles to PopUp Markers
+    addCircles(quakeMarkers);
 
     //Circle Function
     function addCircles(quakeMarkers){
 
-      var quakeCircle = L.circle
+      var quakeCircle = L.circle(location,{
+
+        
+      });
+
+      quakesCircles.push(quakeCircle);
+
+      quakeCircles.addTo(myMap);
 
       //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
 
