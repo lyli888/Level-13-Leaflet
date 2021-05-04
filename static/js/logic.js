@@ -4,8 +4,41 @@ var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day
 //Globally accessible quakeMarkers array
 var quakeMarkers = [];
 
+//Globally accessible circles array
+var quakeCircles = [];
+
 // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
 d3.json(geolink).then(createMarkers);
+
+ 
+//Creates & places markers w/ earthquake info
+function createMarkers(response) {
+
+
+    // Pull data from response
+    for (var i = 0; i < response.features.length; i++) {
+      var place = response.features[i].properties.place;
+    	var mag = response.features[i].properties.mag;
+      var date = response.features[i].properties.time;
+    	var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
+    	var depth = response.features[i].geometry.coordinates[2];
+
+		  console.log(location);
+  
+      // For each station, create a marker and bind a popup with the station's name
+      var quakeMarker = L.marker(location)
+      .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>"+ "<h3><h3>Depth: " + response.features[i].geometry.coordinates[2] + "</h3>"+ "<h3><h3>Date: " + response.features[i].properties.time+ "</h3>");
+  
+      // Add the marker to the quakeMarkers array
+      quakeMarkers.push(quakeMarker);
+    }
+
+    //Add Circles to PopUp Markers
+    addCircles(quakeMarkers);
+    // Create a layer group made from the quake markers array, pass it into the createMap function
+    createMap(L.layerGroup(quakeMarkers));
+    
+} 
 
 //Create Map function
 function createMap(earthquakes) {
@@ -41,35 +74,6 @@ function createMap(earthquakes) {
   }).addTo(myMap);
 
 }
- 
-//Creates & places markers w/ earthquake info
-function createMarkers(response) {
-
-
-    // Pull data from response
-    for (var i = 0; i < response.features.length; i++) {
-      var place = response.features[i].properties.place;
-    	var mag = response.features[i].properties.mag;
-      var date = response.features[i].properties.time;
-    	var location = [response.features[i].geometry.coordinates[0], response.features[i].geometry.coordinates[1]];
-    	var depth = response.features[i].geometry.coordinates[2];
-
-		  console.log(location);
-  
-      // For each station, create a marker and bind a popup with the station's name
-      var quakeMarker = L.marker(location)
-      .bindPopup("<h3>" + response.features[i].properties.place + "<h3><h3>Magnitude: " + response.features[i].properties.mag + "</h3>"+ "<h3><h3>Depth: " + response.features[i].geometry.coordinates[2] + "</h3>"+ "<h3><h3>Date: " + response.features[i].properties.time+ "</h3>");
-  
-      // Add the marker to the quakeMarkers array
-      quakeMarkers.push(quakeMarker);
-    }
-
-    //Add Circles to PopUp Markers
-    addCircles(quakeMarkers);
-    // Create a layer group made from the quake markers array, pass it into the createMap function
-    createMap(L.layerGroup(quakeMarkers));
-    
-} 
 
 //Circle Function
 function addCircles(quakeMarkers){
