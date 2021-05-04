@@ -1,11 +1,11 @@
-//Globally Accessible Data Link
-var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
-
-// Perform an API call to the USGS API to get earthquake information. Call createMarkers 
-d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson").then(createMarkers);
+//Globally Accessible Link to GeoJSON data
+var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
 
 //Globally accessible quakeMarkers array
 var quakeMarkers = [];
+
+// Perform an API call to the USGS API to get earthquake information. Call createMarkers 
+d3.json(geolink).then(createMarkers);
 
 //Create Map function
 function createMap(earthquakes) {
@@ -69,14 +69,15 @@ function createMarkers(response) {
     // Create a layer group made from the quake markers array, pass it into the createMap function
     createMap(L.layerGroup(quakeMarkers));
     
-    //Circle Function
-    function addCircles(quakeMarkers){
-
-      //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
-
-
-    }
 } 
+
+//Circle Function
+function addCircles(quakeMarkers){
+
+  //For each object in quakeMarkers, draw a circle at that location calling quakeRadius & quakeColor functions
+
+
+}
 
 //Circle Marker Radius Function
 function quakeRadius(mag) {
