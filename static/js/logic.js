@@ -10,6 +10,9 @@ var quakeMarkers = [];
 //Globally accessible quakeCircles array
 var quakeCircles = [];
 
+//Globally Accessible Legend variable
+var legend;
+
 // Perform an API call to the USGS API to get earthquake information. Call createMarkers 
 d3.json(geolink).then(createMarkers);
 
@@ -37,7 +40,7 @@ function createMarkers(response) {
       var quakeCircle = L.circle(location, {
           color: "000000",
           fillColor: quakeColor(depth),
-          opacity: 0.5,
+          opacity: 0.50,
           radius: quakeRadius(mag)
       });
 
@@ -45,7 +48,7 @@ function createMarkers(response) {
 
     }//End of 1st FOR LOOP through geoJSON response object
     
-    // Create layer groups from marker arrays & call map drawing functions
+    // Create a layer group made from the quake markers array, pass to & call createMap
     createMap(L.layerGroup(quakeMarkers));
     addCircles(L.layerGroup(quakeCircles));
 } 
@@ -87,7 +90,9 @@ function createMap(earthquakes) {
 }
 
 function addCircles(quakeCircles){
+  //Add Circles 
   quakeCircles.addTo(myMap);
+  createLegend();
 }
 
 //Circle Marker Radius Function
@@ -110,4 +115,22 @@ function quakeColor(depth) {
   } else {
       return "#000000";
   };
+}
+
+function createLegend(){
+  legend = L.control({position: "bottomright"})
+
+  legend.onAdd = function() {
+    var div = L.DomUtil.create('div', 'legend'),
+      grades = [0, 1, 5, 10, 50, 150],
+      labels = ["Green", "Yellow", "Orange", "Gray", "Black"];
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + 'Legend' + '<p>' + quakeColor(grades[i]) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+' );
+    }
+    return div;
+  };
+  legend.addTo(myMap);
 }
