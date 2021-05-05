@@ -123,12 +123,12 @@ function createLegend(){
   legend.onAdd = function() {
     var div = L.DomUtil.create('div', 'legend'),
       grades = [0, 1, 5, 10, 50, 150],
-      labels = [];
+      labels = ["Green", "Yellow", "Orange", "Red", "Gray", "Black"]
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + quakeColor(grades[i]) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+' );
+            '<i style="background:' + 'Legend: Depth ' + '<br>' + quakeColor(grades[i]) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;'  + grades[i + 1] + ' '+ labels[i] + '<br>' : '+ : Black'  );
 
     }
     return div;
