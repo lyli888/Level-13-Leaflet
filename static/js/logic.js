@@ -48,7 +48,7 @@ function createMarkers(response) {
 
     }//End of 1st FOR LOOP through geoJSON response object
     
-    // Create a layer group made from the quake markers array, pass to & call createMap
+    // Create layer groups made from markers & circles arrays, pass to & call createMap & addCircles functions
     createMap(L.layerGroup(quakeMarkers));
     addCircles(L.layerGroup(quakeCircles));
 } 
@@ -117,6 +117,7 @@ function quakeColor(depth) {
   };
 }
 
+//Legend
 function createLegend(){
   legend = L.control({position: "bottomright"})
 
@@ -124,7 +125,7 @@ function createLegend(){
     var div = L.DomUtil.create('div', 'legend'),
       grades = [0, 1, 5, 10, 50, 150],
       labels = ["GREEN", "YELLOW", "ORANGE", "RED", "GREY", "BLACK"]
-    // loop through our density intervals and generate a label with a colored square for each interval
+    // loop through our depth intervals and generate a label for each
     for (var i = 0; i < (grades.length + 1); i++) {
         div.innerHTML +=
             '<i style="background:' + '"></i> ' +
