@@ -1,5 +1,5 @@
 //Globally accessible Link to GeoJSON data
-var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson";
+var geolink = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 //Glonally accessible map variable
 var myMap;
