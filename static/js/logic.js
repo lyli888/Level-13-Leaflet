@@ -127,25 +127,8 @@ function createLegend(){
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + legendColor(grades[i]) + '"></i> ' +
+            '<i style="background:' + quakeColor(grades[i]) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+' );
-
-            function legendColor(x){
-              if (x == 0) {
-                  return "#008000";
-              } else if (x == 1) {
-                  return "#FF0000";
-              } else if (x == 5) {
-                  return "#FFA500";
-              } else if (x == 10) {
-                  return "#FFFF00";
-              } else if (x == 150) {
-                return "#008000";
-              } else {
-                return "#000000";
-              };
-
-            }
 
     }
     return div;
