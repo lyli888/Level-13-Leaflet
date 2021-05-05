@@ -1,4 +1,4 @@
-# GeoMapping Earthquake Data with Leaflet
+# GeoMapping Earthquake Data: Leaflet
 
 ##NOTE: For cybersecurity reasons, I have omitted my MapBox API key. Please obtain your own for free from [mapbox.com](https://docs.mapbox.com/help/getting-started/access-tokens/) to run script. See [screenshot](/EarthquakeMap.png) for project results.
 
@@ -9,13 +9,13 @@ The USGS provides earthquake data in a number of different formats, updated ever
 
 ## Import & Visualize the Data
 
-   * Create a map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude.
+* Create a map using Leaflet that plots all of the earthquakes from your data set based on their longitude and latitude.
 
-   * Your data markers should reflect the magnitude of the earthquake by their size and and depth of the earth quake by color. Earthquakes with higher magnitudes should appear
+* Your data markers should reflect the magnitude of the earthquake by their size and and depth of the earth quake by color. Earthquakes with higher magnitudes should appear
      larger and earthquakes with greater depth should appear darker in color.
 
-   * **HINT** the depth of the earth can be found as the third coordinate for each earthquake.
+* **HINT** the depth of the earth can be found as the third coordinate for each earthquake.
 
-   * Include popups that provide additional information about the earthquake when a marker is clicked.
+* Include popups that provide additional information about the earthquake when a marker is clicked.
 
-   * Create a legend that will provide context for your map data.
+* Create a legend that will provide context for your map data.
