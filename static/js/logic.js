@@ -123,14 +123,33 @@ function createLegend(){
   legend.onAdd = function() {
     var div = L.DomUtil.create('div', 'legend'),
       grades = [0, 1, 5, 10, 50, 150],
-      labels = ["Green", "Yellow", "Orange", "Red", "Gray", "Black"];
+      labels = [];
     // loop through our density intervals and generate a label with a colored square for each interval
     for (var i = 0; i < grades.length; i++) {
         div.innerHTML +=
-            '<i style="background:' + 'Legend' + '<p>' + quakeColor(grades[i]) + '"></i> ' +
+            '<i style="background:' + legendColor(grades[i]) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+' );
+
+            function legendColor(){
+              if (grades[i] == 0) {
+                  return "#008000";
+              } else if (grades[i] == 1) {
+                  return "#FF0000";
+              } else if (grades[1] == 5) {
+                  return "#FFA500";
+              } else if (grades[i] == 10) {
+                  return "#FFFF00";
+              } else if (grades[i] == 150) {
+                return "#008000";
+              } else {
+                return "#000000";
+              };
+
+            }
+
     }
     return div;
   };
   legend.addTo(myMap);
 }
+
