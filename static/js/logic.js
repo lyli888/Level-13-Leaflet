@@ -130,16 +130,16 @@ function createLegend(){
             '<i style="background:' + legendColor(grades[i]) + '"></i> ' +
             grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+' );
 
-            function legendColor(){
-              if (grades[i] == 0) {
+            function legendColor(x){
+              if (x == 0) {
                   return "#008000";
-              } else if (grades[i] == 1) {
+              } else if (x == 1) {
                   return "#FF0000";
-              } else if (grades[1] == 5) {
+              } else if (x == 5) {
                   return "#FFA500";
-              } else if (grades[i] == 10) {
+              } else if (x == 10) {
                   return "#FFFF00";
-              } else if (grades[i] == 150) {
+              } else if (x == 150) {
                 return "#008000";
               } else {
                 return "#000000";
